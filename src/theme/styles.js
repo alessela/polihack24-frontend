@@ -2,15 +2,15 @@ import { mode } from "@chakra-ui/theme-tools";
 export const globalStyles = {
   colors: {
     brand: {
-      100: "#E9E3FF",
-      200: "#422AFB",
-      300: "#422AFB",
-      400: "#7551FF",
-      500: "#422AFB",
-      600: "#3311DB",
-      700: "#02044A",
-      800: "#190793",
-      900: "#11047A",
+      100: "#3E9D79",
+      200: "#3E9D79",
+      300: "#3E9D79",
+      400: "#3E9D79",
+      500: "#3E9D79",
+      600: "#3E9D79",
+      700: "#3E9D79",
+      800: "#3E9D79",
+      900: "#3E9D79",
     },
     brandScheme: {
       100: "#E9E3FF",
@@ -82,15 +82,15 @@ export const globalStyles = {
     global: (props) => ({
       body: {
         overflowX: "hidden",
-        bg: mode("secondaryGray.300", "navy.900")(props),
-        fontFamily: "DM Sans",
+        bg: "#F4FFFB",
+        fontFamily: "Poppins",
         letterSpacing: "-0.5px",
       },
       input: {
         color: "gray.700",
       },
       html: {
-        fontFamily: "DM Sans",
+        fontFamily: "Poppins",
       },
     }),
   },
