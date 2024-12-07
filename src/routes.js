@@ -21,14 +21,14 @@ import SignInCentered from 'views/auth/signIn';
 
 const routes = [
   {
-    name: 'Main Dashboard',
+    name: 'Dashboard',
     layout: '/admin',
     path: '/default',
     icon: <Icon as={MdHome} width="26px" height="26px" color="inherit" mt="5px" />,
     component: <MainDashboard />,
   },
   {
-    name: 'Activity History',
+    name: 'History',
     layout: '/admin',
     path: '/activity-history',
     icon: <Icon as={MdBarChart} width="26px" height="26px" color="inherit" mt="5px" />,
