@@ -19,24 +19,22 @@ export default function Marketplace() {
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       <Grid
         mb='20px'
-        gridTemplateColumns={{ xl: "repeat(3, 1fr)", "2xl": "1fr 0.46fr" }}
-        gap={{ base: "20px", xl: "20px" }}
-        display={{ base: "block", xl: "grid" }}>
+        display={{ base: "block" }}>
         <Flex
           flexDirection='column'
           gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}>
-            <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
+            <SimpleGrid columns={{ base: 2, md: 4 }} gap='20px'>
               <NFT
                 name='Test 1'
                 location='Baciu, Cluj-Napoca'
                 image={Nft1}
-                stars='4'
-                reviews='17'
+                stars='0'
                 benefits={[
                   "Mindfullness",
                   "Relaxing",
                   "Nature",
                 ]}
+                leave_review="1"
               />
             </SimpleGrid>
         </Flex>

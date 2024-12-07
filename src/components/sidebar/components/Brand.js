@@ -12,7 +12,7 @@ export function SidebarBrand() {
 
   return (
     <Flex align='center' direction='column'>
-      <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="Logo" width="130px"
+      <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="Logo" width="150px"
         style={{marginBottom: '20px'}}
       />
       <HSeparator mb='20px' />
