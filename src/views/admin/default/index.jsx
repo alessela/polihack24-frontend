@@ -22,151 +22,282 @@
 
 // Chakra imports
 import {
-  Avatar,
   Box,
+  Button,
   Flex,
+  FormControl,
   FormLabel,
-  Icon,
-  Select,
-  SimpleGrid,
-  useColorModeValue,
+  Heading,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  RangeSlider,
+  RangeSliderTrack,
+  RangeSliderFilledTrack,
+  RangeSliderThumb,
+  Switch,
+  Textarea,
+  useColorModeValue
 } from "@chakra-ui/react";
-// Assets
-import Usa from "assets/img/dashboards/usa.png";
-// Custom components
-import MiniCalendar from "components/calendar/MiniCalendar";
-import MiniStatistics from "components/card/MiniStatistics";
-import IconBox from "components/icons/IconBox";
 import React from "react";
-import {
-  MdAddTask,
-  MdAttachMoney,
-  MdBarChart,
-  MdFileCopy,
-} from "react-icons/md";
-import CheckTable from "views/admin/default/components/CheckTable";
-import ComplexTable from "views/admin/default/components/ComplexTable";
-import DailyTraffic from "views/admin/default/components/DailyTraffic";
-import PieCard from "views/admin/default/components/PieCard";
-import Tasks from "views/admin/default/components/Tasks";
-import TotalSpent from "views/admin/default/components/TotalSpent";
-import WeeklyRevenue from "views/admin/default/components/WeeklyRevenue";
-import {
-  columnsDataCheck,
-  columnsDataComplex,
-} from "views/admin/default/variables/columnsData";
-import tableDataCheck from "views/admin/default/variables/tableDataCheck.json";
-import tableDataComplex from "views/admin/default/variables/tableDataComplex.json";
 
 export default function UserReports() {
   // Chakra Color Mode
-  const brandColor = useColorModeValue("brand.500", "white");
-  const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
+  const textColor = useColorModeValue("navy.700", "white");
+  const [budgetValues, setBudgetValues] = React.useState([120, 240])
+
+  const activityTypes = ['outdoor', 'hiking', 'volunteering']
+  const [selectedActivityTypes, setActivityTypes] = React.useState(['hiking', 'volunteering'])
+
+  const levels = ['high', 'moderate', 'low']
+  const [selectedLevels, setSelectedLevels] = React.useState(['moderate', 'low'])
+
+  const [isGroup, setGroup] = React.useState(false)
+  const [noGroupMembers, setNoGroupMembers] = React.useState(0)
+  
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-      <SimpleGrid
-        columns={{ base: 1, md: 2, lg: 3, "2xl": 6 }}
-        gap='20px'
-        mb='20px'>
-        <MiniStatistics
-          startContent={
-            <IconBox
-              w='56px'
-              h='56px'
-              bg={boxBg}
-              icon={
-                <Icon w='32px' h='32px' as={MdBarChart} color={brandColor} />
-              }
-            />
-          }
-          name='Earnings'
-          value='$350.4'
-        />
-        <MiniStatistics
-          startContent={
-            <IconBox
-              w='56px'
-              h='56px'
-              bg={boxBg}
-              icon={
-                <Icon w='32px' h='32px' as={MdAttachMoney} color={brandColor} />
-              }
-            />
-          }
-          name='Spend this month'
-          value='$642.39'
-        />
-        <MiniStatistics growth='+23%' name='Sales' value='$574.34' />
-        <MiniStatistics
-          endContent={
-            <Flex me='-16px' mt='10px'>
-              <FormLabel htmlFor='balance'>
-                <Avatar src={Usa} />
-              </FormLabel>
-              <Select
-                id='balance'
-                variant='mini'
-                mt='5px'
-                me='0px'
-                defaultValue='usd'>
-                <option value='usd'>USD</option>
-                <option value='eur'>EUR</option>
-                <option value='gba'>GBA</option>
-              </Select>
+      <Flex
+        maxW={{ base: "100%", md: "max-content" }}
+        w='100%'
+        mx={{ base: "auto", lg: "0px" }}
+        me='auto'
+        h='100%'
+        alignItems='start'
+        justifyContent='center'
+        mb={{ base: "30px", md: "60px" }}
+        px={{ base: "25px", md: "0px" }}
+        mt={{ base: "40px", md: "14vh" }}
+        flexDirection='column'>
+        <Box me='auto'>
+          <Heading color={textColor} fontSize='20px' mb='10px'>
+            New activity
+          </Heading>
+        </Box>
+        <Flex
+          zIndex='2'
+          direction='column'
+          w={{ base: "100%", md: "420px" }}
+          maxW='100%'
+          background='transparent'
+          borderRadius='15px'
+          mx={{ base: "auto", lg: "unset" }}
+          me='auto'
+          mb={{ base: "20px", md: "auto" }}>
+          <FormControl>
+            <FormLabel
+              display='flex'
+              ms='4px'
+              fontSize='sm'
+              fontWeight='500'
+              color={textColor}
+              mb='8px'>
+              Activity type
+            </FormLabel>
+            <Flex
+              align='center'
+              me='20px'
+              ms={{ base: "24px", md: "0px" }}
+              mt={{ base: "20px", md: "0px" }}>
+                {
+                  activityTypes.map (activityType => (
+                    <Button
+                      key={activityType}
+                      variant={selectedActivityTypes.includes(activityType) ? 'brand' : 'white'}
+                      color={selectedActivityTypes.includes(activityType) ? 'white' : 'black'}
+                      onClick={
+                        () => 
+                          setActivityTypes(selectedActivityTypes.includes(activityType) ?
+                                              selectedActivityTypes.filter(actType => actType != activityType) :
+                                              selectedActivityTypes.concat([activityType]))
+                      }
+                      fontSize='sm'
+                      fontWeight='500'
+                      borderRadius='70px'
+                      px='24px'
+                      py='5px'>
+                        {activityType}
+                    </Button>
+                  ))
+                }
             </Flex>
-          }
-          name='Your balance'
-          value='$1,000'
-        />
-        <MiniStatistics
-          startContent={
-            <IconBox
-              w='56px'
-              h='56px'
-              bg='linear-gradient(90deg, #4481EB 0%, #04BEFE 100%)'
-              icon={<Icon w='28px' h='28px' as={MdAddTask} color='white' />}
-            />
-          }
-          name='New Tasks'
-          value='154'
-        />
-        <MiniStatistics
-          startContent={
-            <IconBox
-              w='56px'
-              h='56px'
-              bg={boxBg}
-              icon={
-                <Icon w='32px' h='32px' as={MdFileCopy} color={brandColor} />
-              }
-            />
-          }
-          name='Total Projects'
-          value='2935'
-        />
-      </SimpleGrid>
 
-      <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px' mb='20px'>
-        <TotalSpent />
-        <WeeklyRevenue />
-      </SimpleGrid>
-      <SimpleGrid columns={{ base: 1, md: 1, xl: 2 }} gap='20px' mb='20px'>
-        <CheckTable columnsData={columnsDataCheck} tableData={tableDataCheck} />
-        <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px'>
-          <DailyTraffic />
-          <PieCard />
-        </SimpleGrid>
-      </SimpleGrid>
-      <SimpleGrid columns={{ base: 1, md: 1, xl: 2 }} gap='20px' mb='20px'>
-        <ComplexTable
-          columnsData={columnsDataComplex}
-          tableData={tableDataComplex}
-        />
-        <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px'>
-          <Tasks />
-          <MiniCalendar h='100%' minW='100%' selectRange={false} />
-        </SimpleGrid>
-      </SimpleGrid>
+            <FormLabel
+              ms='4px'
+              fontSize='sm'
+              fontWeight='500'
+              color={textColor}
+              display='flex'>
+              Budget
+            </FormLabel>
+            <RangeSlider defaultValue={[120, 240]} min={0} max={300} step={30}
+              onChange={setBudgetValues}>
+              <RangeSliderTrack bg='red.100'>
+                <RangeSliderFilledTrack bg='blue' />
+              </RangeSliderTrack>
+              <RangeSliderThumb boxSize={6} index={0} >
+                {budgetValues[0]}
+              </RangeSliderThumb>
+              <RangeSliderThumb boxSize={6} index={1}>
+                {budgetValues[1]}
+              </RangeSliderThumb>
+            </RangeSlider>
+
+            <FormLabel
+              ms='4px'
+              fontSize='sm'
+              fontWeight='500'
+              color={textColor}
+              display='flex'>
+              Group
+            </FormLabel>
+            <Flex
+              align='center'
+              me='20px'
+              ms={{ base: "24px", md: "0px" }}
+              mt={{ base: "20px", md: "0px" }}>
+              <Switch 
+                isChecked={isGroup} 
+                onChange={(event) => {
+                  let newValue = event.target.checked;
+                  setGroup(newValue)
+                  setNoGroupMembers(newValue ? 1 : 0)
+                }} 
+                size="lg" 
+                colorScheme="teal" 
+              />
+              <FormLabel
+                ms='4px'
+                fontSize='sm'
+                fontWeight='500'
+                color={textColor}
+                display='flex'>
+                Number
+              </FormLabel>
+              <NumberInput
+                value={noGroupMembers}
+                onChange={(_, newValue) => setNoGroupMembers(newValue)}
+                min={1}
+                isDisabled={!isGroup}>
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+            </Flex>
+
+            <FormLabel
+              ms='4px'
+              fontSize='sm'
+              fontWeight='500'
+              color={textColor}
+              display='flex'>
+              Duration
+            </FormLabel>
+            <Flex
+              align='center'
+              me='20px'
+              ms={{ base: "24px", md: "0px" }}
+              mt={{ base: "20px", md: "0px" }}>
+              <div>
+                <FormLabel
+                  ms='4px'
+                  fontSize='sm'
+                  fontWeight='500'
+                  color={textColor}
+                  display='flex'>
+                  Hours
+                </FormLabel>
+                <NumberInput defaultValue={0} min={0}>
+                  <NumberInputField />
+                  <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                  </NumberInputStepper>
+                </NumberInput>
+              </div>
+              <div>
+                <FormLabel
+                  ms='4px'
+                  fontSize='sm'
+                  fontWeight='500'
+                  color={textColor}
+                  display='flex'>
+                  Days
+                </FormLabel>
+                <NumberInput defaultValue={0} min={0}>
+                  <NumberInputField />
+                  <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                  </NumberInputStepper>
+                </NumberInput>
+              </div>
+            </Flex>
+
+            <FormLabel
+              display='flex'
+              ms='4px'
+              fontSize='sm'
+              fontWeight='500'
+              color={textColor}
+              mb='8px'>
+              Level of physical activity
+            </FormLabel>
+            <Flex
+              align='center'
+              me='20px'
+              ms={{ base: "24px", md: "0px" }}
+              mt={{ base: "20px", md: "0px" }}>
+                {
+                  levels.map (level => (
+                    <Button
+                      key={level}
+                      variant={selectedLevels.includes(level) ? 'brand' : 'white'}
+                      color={selectedLevels.includes(level) ? 'white' : 'black'}
+                      onClick={
+                        () => 
+                          setSelectedLevels(selectedLevels.includes(level) ?
+                                           selectedLevels.filter(lvl => lvl != level) :
+                                           selectedLevels.concat([level]))
+                      }
+                      fontSize='sm'
+                      fontWeight='500'
+                      borderRadius='70px'
+                      px='24px'
+                      py='5px'>
+                        {level}
+                    </Button>
+                  ))
+                }
+            </Flex>
+
+            <FormLabel
+              display='flex'
+              ms='4px'
+              fontSize='sm'
+              fontWeight='500'
+              color={textColor}
+              mb='8px'>
+              Additional info
+            </FormLabel>
+            <Textarea />
+
+            <Button
+              fontSize='sm'
+              variant='brand'
+              fontWeight='500'
+              w='100%'
+              h='50'
+              mb='24px'>
+              Find me activities
+            </Button>
+          </FormControl>
+        </Flex>
+      </Flex>
     </Box>
   );
 }
