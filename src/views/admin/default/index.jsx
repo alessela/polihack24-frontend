@@ -362,11 +362,12 @@ export default function UserReports() {
           </FormControl>
         </Flex>
       </Flex>
+      <Box ref={resultsGrid}>
       {generatedJourneys.length > 0 ? (
-        <Box ref={resultsGrid}>
+        <Box>
           <Text mt="50px" mb="5px" fontSize="32px" fontWeight={600} align="center">Discover these adventures</Text>
           <Text mb="30px" fontSize="16px" fontWeight={400} align="center">We've found these new possible aventures tailored to your needs.</Text>
-          <SimpleGrid columns={{ base: 2, md: 3 }} gap="20px" mt="30px">
+          <SimpleGrid columns={{ base: 2, md: 3 }} gap="20px" mt="30px" ref={resultsGrid}>
         {generatedJourneys.map((journey, index) => (
           <NFT
             is_active={false}
@@ -387,6 +388,7 @@ export default function UserReports() {
         ) : (
         <></>
       )}
+      </Box>
     </Box>
   );
 }
