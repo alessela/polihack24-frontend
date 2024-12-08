@@ -326,6 +326,7 @@ export default function NFT(props) {
                     }}
                     fontWeight="medium"
                     me="5px"
+                    href={link_to_maps}
                   >
                     {location}
                   </Link>
