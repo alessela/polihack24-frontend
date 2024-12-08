@@ -187,6 +187,7 @@ export default function NFT(props) {
                 </Flex>
               )}
               <Link
+                ms="auto"
                 mt={{
                   base: '0px',
                   md: '10px',
@@ -206,7 +207,7 @@ export default function NFT(props) {
                   onClick={onOpen}
                   py="5px"
                 >
-                  Explore
+                  {is_active === false ? "Explore" : "See details"}
                 </Button>
               </Link>
             </Flex>

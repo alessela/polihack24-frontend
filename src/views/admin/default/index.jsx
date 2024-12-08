@@ -339,7 +339,7 @@ export default function UserReports() {
             <Button
               fontSize='sm'
               mt="25px"
-
+              onClick={handleSubmit}
               variant='brand'
               fontWeight='500'
               w='auto'
