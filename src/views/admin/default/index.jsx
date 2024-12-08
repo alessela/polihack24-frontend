@@ -259,7 +259,8 @@ export default function UserReports() {
                 >
                   Hours
                 </FormLabel>
-                <NumberInput defaultValue={0} min={0}>
+                <NumberInput defaultValue={0} min={0} value={hours}
+                  onChange={(_, valueAsNumber) => setHours(valueAsNumber)}>
                   <NumberInputField maxW="100px" />
                   <NumberInputStepper>
                     <NumberIncrementStepper />
@@ -276,7 +277,8 @@ export default function UserReports() {
                 >
                   Days
                 </FormLabel>
-                <NumberInput defaultValue={0} min={0}>
+                <NumberInput defaultValue={0} min={0} value={days}
+                  onChange={(_, valueAsNumber) => setDays(valueAsNumber)}>
                   <NumberInputField maxW="100px" />
                   <NumberInputStepper>
                     <NumberIncrementStepper />
