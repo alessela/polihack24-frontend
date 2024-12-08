@@ -1,36 +1,32 @@
 // Chakra imports
 import {
-  AvatarGroup,
-  Avatar,
   Box,
   Button,
-  Flex,
-  Icon,
-  Image,
-  Link,
-  Text,
-  Grid,
   Divider,
-  useColorModeValue,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
+  Flex,
   FormControl,
   FormLabel,
-  Input,
+  Grid,
+  Icon,
+  Link,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
   Textarea,
+  useColorModeValue,
+  useDisclosure
 } from '@chakra-ui/react';
 import { IoStar, IoStarOutline } from 'react-icons/io5';
 // Custom components
 import Card from 'components/card/Card.js';
 // Assets
-import React, { useState } from 'react';
-import { IoHeart, IoHeartOutline, IoArrowRedoSharp } from 'react-icons/io5';
+import { useState } from 'react';
+import { IoArrowRedoSharp } from 'react-icons/io5';
 
 import axios from 'axios';
 
@@ -94,6 +90,35 @@ export default function NFT(props) {
       setStars(rating);
       setHowFelt(reviewText);
       setLeaveReview('0');
+        onReviewClose(); // Close the modal on success
+      } else {
+        console.error('Failed to submit review');
+      }
+    } catch (error) {
+      console.error('Error submitting review:', error.message);
+    }
+    onReviewClose();
+  };
+  
+  const handleJoinActivity = async () => {
+    const API_URL = process.env.REACT_APP_API_BASE_URL;
+    const JID = process.env.REACT_APP_JID;
+    const data = { name_of_location: name, budget_breakdown: budget_breakdown, description: description, wellbeing_impact: wellbeing_impact, tags: benefits, maps_link: link_to_maps, journal: JID}; // Prepare the data to send
+
+
+    try {
+      const response = await axios.post(
+        `${API_URL}journeys/save/`,
+        data,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+
+      if (response.status === 200) {
+        console.log('Review submitted successfully');
         onReviewClose(); // Close the modal on success
       } else {
         console.error('Failed to submit review');
@@ -427,6 +452,7 @@ export default function NFT(props) {
                 borderRadius="100px"
                 bg="#3E9D79"
                 mt="25px"
+                onClick={handleJoinActivity}
               >
                 Join this activity
               </Button>

@@ -29,28 +29,27 @@ import {
   FormControl,
   FormLabel,
   Heading,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
   RangeSlider,
-  RangeSliderTrack,
   RangeSliderFilledTrack,
   RangeSliderThumb,
+  RangeSliderTrack,
   SimpleGrid,
   Switch,
   Textarea,
   useColorModeValue,
 } from '@chakra-ui/react';
-import React, { useRef } from 'react';
-import { useState } from 'react';
 import axios from 'axios';
+import React, { useRef, useState } from 'react';
 
 export default function UserReports() {
   // Chakra Color Mode
   const textColor = useColorModeValue('navy.700', 'white');
-  const [budgetValues, setBudgetValues] = React.useState([120, 240]);
+  const [budgetValues, setBudgetValues] = React.useState([0, 1000]);
 
   const activityTypes = ['outdoor', 'hiking', 'volunteering', 'music', 'cultural', 'art', 'sports', 'food', 'shopping', 'relaxing', 'adventure', 'sightseeing', 'nightlife', 'wellness', 'learning', 'social', 'family', 'pets', 'water', 'mountain', 'forest', 'city', 'beach', 'desert', 'island', 'lake', 'river', 'park', 'garden', 'cave', 'castle', 'museum', 'theater', 'cinema', 'concert', 'festival', 'exhibition', 'workshop', 'class', 'game'];
   const [selectedActivityTypes, setActivityTypes] = React.useState(['volunteering'])
@@ -191,7 +190,7 @@ export default function UserReports() {
             >
               Budget
             </FormLabel>
-            <RangeSlider defaultValue={[120, 240]} min={0} max={300} step={30} maxW="420px"
+            <RangeSlider defaultValue={[0, 1000]} min={0} max={1000} step={50} maxW="700px"
               onChange={setBudgetValues}>
               <RangeSliderTrack bg='red.100'>
                 <RangeSliderFilledTrack bg='#3E9D79' />
@@ -368,7 +367,7 @@ export default function UserReports() {
           <NFT
             is_active={false}
             key={index}
-            stars={journey.rating}
+            stars={null}
             name={journey.name_of_location}
             location="Cluj-Napoca, Romania"
             description={journey.description}
