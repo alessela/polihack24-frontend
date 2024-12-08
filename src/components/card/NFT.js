@@ -167,6 +167,7 @@ export default function NFT(props) {
                 me="10px"
                 fontSize="12px"
                 fontWeight="500"
+                textTransform={'capitalize'}
               >
                 {benefit}
               </Flex>
