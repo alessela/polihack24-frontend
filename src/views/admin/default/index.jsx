@@ -38,11 +38,12 @@ import {
   RangeSliderTrack,
   RangeSliderFilledTrack,
   RangeSliderThumb,
+  SimpleGrid,
   Switch,
   Textarea,
   useColorModeValue,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -66,6 +67,8 @@ export default function UserReports() {
   const [additionalInfo, setAdditionalInfo] = useState('');
 
   const [generatedJourneys, setGeneratedJourneys] = useState([]);
+
+  const resultsGrid = useRef(null);
 
   const handleSubmit = async () => {
     const API_URL = process.env.REACT_APP_API_BASE_URL;
@@ -93,6 +96,15 @@ export default function UserReports() {
       });
       console.log('Response:', response.data);
       setGeneratedJourneys(response.data);
+
+      if (resultsGrid.current) {
+        setTimeout(() => {
+          window.scrollTo({
+            top: window.scrollY + 400,
+            behavior: 'smooth'
+          });
+        }, 500);
+      }
     } catch (error) {
       console.error('Error:', error.message);
     }
@@ -107,6 +119,7 @@ export default function UserReports() {
         alignItems='start'
         justifyContent='center'
         bg="white"
+        borderRadius='15px'
         p="50"
         flexDirection='column'>
         <Box me='auto'>
@@ -325,10 +338,7 @@ export default function UserReports() {
               ms="4px"
               fontSize="sm"
               fontWeight="500"
-              display='flex'
               mt="15px"
-              fontSize='sm'
-              fontWeight='500'
               color={textColor}
               mb='10px'>
               Additional info
@@ -352,11 +362,13 @@ export default function UserReports() {
           </FormControl>
         </Flex>
       </Flex>
+      <SimpleGrid columns={{ base: 2, md: 3 }} gap="20px" mt="30px" ref={resultsGrid}>
       {generatedJourneys.length > 0 ? (
         generatedJourneys.map((journey, index) => (
           <NFT
             is_active={false}
             key={index}
+            stars={journey.rating}
             name={journey.name_of_location}
             location="Cluj-Napoca, Romania"
             description={journey.description}
@@ -370,6 +382,7 @@ export default function UserReports() {
       ) : (
         <></>
       )}
+      </SimpleGrid>
     </Box>
   );
 }

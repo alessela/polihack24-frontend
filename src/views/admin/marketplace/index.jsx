@@ -31,7 +31,7 @@ export default function Marketplace() {
           flexDirection="column"
           gridArea={{ xl: '1 / 1 / 2 / 3', '2xl': '1 / 1 / 2 / 2' }}
         >
-          <SimpleGrid columns={{ base: 2, md: 4 }} gap="20px">
+          <SimpleGrid columns={{ base: 2, md: 3 }} gap="20px">
             {userData.journal?.journeys?.length > 0 ? (
               userData.journal.journeys.map((journey, index) => (
                 <NFT
@@ -43,11 +43,12 @@ export default function Marketplace() {
                   description={journey.description}
                   budget_breakdown={journey.budget_breakdown}
                   wellbeing_impact={journey.wellbeing_impact}
-                  stars={journey.rating}
+                  stars={null}
                   benefits={journey.tags}
                   link_to_maps={journey.maps_link}
                   how_felt={journey.how_felt}
-                  leave_review={journey.rating === null ? '1' : '0'}
+                  //leave_review={journey.rating === null ? '1' : '0'}
+                  leave_review="1"
                 />
               ))
             ) : (

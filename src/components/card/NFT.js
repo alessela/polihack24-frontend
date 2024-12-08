@@ -44,8 +44,8 @@ export default function NFT(props) {
     leave_review,
     budget_breakdown,
     wellbeing_impact,
-    stars,
-    how_felt,
+    stars: initialStars = 0,
+    how_felt: initialHowFelt = "",
     link_to_maps,
     journey_id,
   } = props;
@@ -59,11 +59,19 @@ export default function NFT(props) {
   } = useDisclosure();
 
   const [rating, setRating] = useState(0);
+  const [stars, setStars] = useState(initialStars);
+  const [how_felt, setHowFelt] = useState(initialHowFelt);
   const [reviewText, setReviewText] = useState('');
 
   const handleRating = (rate) => {
     setRating(rate);
   };
+
+
+
+  const handleHowFelt = (text) => {
+    setReviewText(text);
+  }
 
   const handleSubmit = async () => {
     const API_URL = process.env.REACT_APP_API_BASE_URL;
@@ -82,6 +90,8 @@ export default function NFT(props) {
 
       if (response.status === 200) {
         console.log('Review submitted successfully');
+      setStars(rating);
+      setHowFelt(reviewText);
         onReviewClose(); // Close the modal on success
       } else {
         console.error('Failed to submit review');
@@ -453,7 +463,7 @@ export default function NFT(props) {
                 focusBorderColor="#3E9D79"
                 rows={5}
                 value={reviewText} // Bind state to the Textarea
-                onChange={(e) => setReviewText(e.target.value)}
+                onChange={(e) => handleHowFelt(e.target.value)}
               />
             </FormControl>
           </ModalBody>
