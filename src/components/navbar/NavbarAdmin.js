@@ -105,7 +105,7 @@ export default function AdminNavbar(props) {
 						_focus={{
 							boxShadow: 'none'
 						}}>
-						👋&nbsp; Welcome back, Adela!
+						👋&nbsp; Welcome back, Mihai!
 					</Link>
 				</Box>
 				<Box ms='auto' w={{ sm: '100%', md: 'unset' }}>

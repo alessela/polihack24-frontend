@@ -68,7 +68,7 @@ export default function HeaderLinks(props) {
         <MenuButton p="0px">
           <Avatar
             color="white"
-            name="Adela Parkson"
+            name="Mihai Vlahui"
             bg="#3E9D79"
             size="sm"
             w="40px"
