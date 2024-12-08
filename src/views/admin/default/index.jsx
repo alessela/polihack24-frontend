@@ -100,7 +100,7 @@ export default function UserReports() {
       if (resultsGrid.current) {
         setTimeout(() => {
           window.scrollTo({
-            top: window.scrollY + 400,
+            top: window.scrollY + 500,
             behavior: 'smooth'
           });
         }, 500);
@@ -362,11 +362,11 @@ export default function UserReports() {
           </FormControl>
         </Flex>
       </Flex>
-      <SimpleGrid columns={{ base: 2, md: 3 }} gap="20px" mt="30px" ref={resultsGrid}>
       {generatedJourneys.length > 0 ? (
-        <Box>
+        <Box ref={resultsGrid}>
           <Text mt="50px" mb="5px" fontSize="32px" fontWeight={600} align="center">Discover these adventures</Text>
-          <Text mb="30px" fontSize="16px" fontWeight={400} align="center">We've found 3 new possible aventures tailored to your needs.</Text>
+          <Text mb="30px" fontSize="16px" fontWeight={400} align="center">We've found these new possible aventures tailored to your needs.</Text>
+          <SimpleGrid columns={{ base: 2, md: 3 }} gap="20px" mt="30px">
         {generatedJourneys.map((journey, index) => (
           <NFT
             is_active={false}
@@ -382,11 +382,11 @@ export default function UserReports() {
             leave_review="0"
           />
         ))}
+      </SimpleGrid>
         </Box>
         ) : (
         <></>
       )}
-      </SimpleGrid>
     </Box>
   );
 }
