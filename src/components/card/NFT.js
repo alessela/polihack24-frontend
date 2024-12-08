@@ -36,7 +36,7 @@ import axios from 'axios';
 
 export default function NFT(props) {
   const {
-    image,
+    is_active,
     description,
     name,
     location,
@@ -96,14 +96,14 @@ export default function NFT(props) {
     <>
       <Card p="20px">
         <Flex direction={{ base: 'column' }} justify="center">
-          <Box mb={{ base: '10px', '2xl': '10px' }} position="relative">
+          {/* <Box mb={{ base: '10px', '2xl': '10px' }} position="relative">
             <Image
               src={image}
               w={{ base: '100%', '3xl': '100%' }}
               h={{ base: '100%', '3xl': '100%' }}
               borderRadius="10px"
             />
-          </Box>
+          </Box> */}
           <Flex flexDirection="row" justify="start" align="center" mb="10px">
             {benefits.map((benefit, key) => (
               <Flex
@@ -164,7 +164,7 @@ export default function NFT(props) {
             </Flex>
             <Flex
               align="center"
-              justify="end"
+              justify="space-between"
               direction={{
                 base: 'row',
                 md: 'column',
@@ -174,6 +174,18 @@ export default function NFT(props) {
               }}
               mt="15px"
             >
+              {stars !== null && (
+                <Flex align="center" gap={1}>
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Icon
+                      key={star}
+                      as={star <= stars ? IoStar : IoStarOutline}
+                      color={star <= stars ? '#3E9D79' : 'gray.300'}
+                      boxSize={5}
+                    />
+                  ))}
+                </Flex>
+              )}
               <Link
                 mt={{
                   base: '0px',
@@ -234,7 +246,7 @@ export default function NFT(props) {
           <ModalBody>
             <Grid templateColumns="repeat(2, 1fr)" gap={6}>
               <Box>
-                <Box mb={{ base: '10px', '2xl': '10px' }} position="relative">
+                {/* <Box mb={{ base: '10px', '2xl': '10px' }} position="relative">
                   <Image
                     src={image}
                     w="100%"
@@ -243,7 +255,7 @@ export default function NFT(props) {
                     borderRadius="10px"
                     mb="40px"
                   />
-                </Box>
+                </Box> */}
                 <Text
                   color={textColor}
                   fontSize="24px"
@@ -336,6 +348,7 @@ export default function NFT(props) {
                     </Flex>
                   ))}
                 </Flex>
+                {is_active === true ? ( <Box>
                 <Text
                   color={textColor}
                   fontSize="18px"
@@ -345,7 +358,7 @@ export default function NFT(props) {
                 >
                   How was it?
                 </Text>
-                {stars === '0' ? (
+                {stars === null ? (
                   <Link
                     color="#3E9D79"
                     fontSize="sm"
@@ -375,14 +388,10 @@ export default function NFT(props) {
                     </Text>
                   </Box>
                 )}
-                <Text
-                  color="secondaryGray.600"
-                  fontSize="14px"
-                  fontWeight="400"
-                >
-                  {how_felt}
-                </Text>
-                <Box
+                </Box> ) : (
+                  <></>
+                )}
+                  <Box
                   bg="#F4FFFB"
                   px="5"
                   py="5"
@@ -399,8 +408,22 @@ export default function NFT(props) {
                 </Box>
               </Box>
             </Grid>
+            {is_active === false ? (
+              <Button
+                variant="darkBrand"
+                borderRadius="100px"
+                bg="#3E9D79"
+                mt="25px"
+              >
+                Join this activity
+              </Button>
+            ) : (
+              <></>
+            )}
           </ModalBody>
-          <ModalFooter></ModalFooter>
+          <ModalFooter>
+            
+          </ModalFooter>
         </ModalContent>
       </Modal>
       <Modal isOpen={isReviewOpen} onClose={onReviewClose} size="xl">

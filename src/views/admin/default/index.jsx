@@ -51,11 +51,8 @@ export default function UserReports() {
   const textColor = useColorModeValue('navy.700', 'white');
   const [budgetValues, setBudgetValues] = React.useState([120, 240]);
 
-  const activityTypes = ['outdoor', 'hiking', 'volunteering'];
-  const [selectedActivityTypes, setActivityTypes] = React.useState([
-    'hiking',
-    'volunteering',
-  ]);
+  const activityTypes = ['outdoor', 'hiking', 'volunteering', 'music', 'cultural', 'art', 'sports', 'food', 'shopping', 'relaxing', 'adventure', 'sightseeing', 'nightlife', 'wellness', 'learning', 'social', 'family', 'pets', 'water', 'mountain', 'forest', 'city', 'beach', 'desert', 'island', 'lake', 'river', 'park', 'garden', 'cave', 'castle', 'museum', 'theater', 'cinema', 'concert', 'festival', 'exhibition', 'workshop', 'class', 'game'];
+  const [selectedActivityTypes, setActivityTypes] = React.useState(['volunteering'])
 
   const levels = ['high', 'moderate', 'low'];
   const [selectedLevels, setSelectedLevels] = React.useState('high');
@@ -104,34 +101,29 @@ export default function UserReports() {
   return (
     <Box pt={{ base: '130px', md: '80px', xl: '80px' }}>
       <Flex
-        maxW={{ base: '100%', md: 'max-content' }}
-        w="100%"
-        mx={{ base: 'auto', lg: '0px' }}
-        me="auto"
-        h="100%"
-        alignItems="start"
-        justifyContent="center"
-        mb={{ base: '30px', md: '60px' }}
-        px={{ base: '25px', md: '0px' }}
-        mt={{ base: '40px', md: '14vh' }}
-        flexDirection="column"
-      >
-        <Box me="auto">
-          <Heading color={textColor} fontSize="20px" mb="10px">
+        maxW={{ base: "100%", md: "max-content" }}
+        w='100%'
+        h='100%'
+        alignItems='start'
+        justifyContent='center'
+        bg="white"
+        p="50"
+        flexDirection='column'>
+        <Box me='auto'>
+          <Heading color={textColor} fontSize='20px' mb='25px'>
             New activity
           </Heading>
         </Box>
         <Flex
-          zIndex="2"
-          direction="column"
-          w={{ base: '100%', md: '420px' }}
-          maxW="100%"
-          background="transparent"
-          borderRadius="15px"
-          mx={{ base: 'auto', lg: 'unset' }}
-          me="auto"
-          mb={{ base: '20px', md: 'auto' }}
-        >
+          zIndex='2'
+          direction='column'
+          w={{ base: "100%"}}
+          maxW='100%'
+          background='transparent'
+          borderRadius='15px'
+          mx={{ base: "auto", lg: "unset" }}
+          me='auto'
+          mb={{ base: "20px", md: "auto" }}>
           <FormControl>
             <FormLabel
               display="flex"
@@ -139,93 +131,81 @@ export default function UserReports() {
               fontSize="sm"
               fontWeight="500"
               color={textColor}
-              mb="8px"
+              mb="10px"
             >
               Activity type
             </FormLabel>
             <Flex
-              align="center"
-              me="20px"
-              ms={{ base: '24px', md: '0px' }}
-              mt={{ base: '20px', md: '0px' }}
-            >
-              {activityTypes.map((activityType) => (
-                <Button
-                  key={activityType}
-                  variant={
-                    selectedActivityTypes.includes(activityType)
-                      ? 'brand'
-                      : 'white'
-                  }
-                  color={
-                    selectedActivityTypes.includes(activityType)
-                      ? 'white'
-                      : 'black'
-                  }
-                  onClick={() =>
-                    setActivityTypes(
-                      selectedActivityTypes.includes(activityType)
-                        ? selectedActivityTypes.filter(
-                            (actType) => actType != activityType,
-                          )
-                        : selectedActivityTypes.concat([activityType]),
-                    )
-                  }
-                  fontSize="sm"
-                  fontWeight="500"
-                  borderRadius="70px"
-                  px="24px"
-                  py="5px"
-                >
-                  {activityType}
-                </Button>
-              ))}
+              align='center'
+              me='20px'
+              ms={{ base: "24px", md: "0px" }}
+              gap={2}
+              flexWrap={{ base: "wrap" }}
+              mt={{ base: "20px", md: "0px" }}>
+                {
+                  activityTypes.map (activityType => (
+                    <Button
+                      key={activityType}
+                      variant={selectedActivityTypes.includes(activityType) ? '#3E9D79' : '#E6FEF5'}
+                      bg={selectedActivityTypes.includes(activityType) ? '#3E9D79' : '#E6FEF5'}
+                      color={selectedActivityTypes.includes(activityType) ? 'white' : 'black'}
+                      onClick={
+                        () => 
+                          setActivityTypes(selectedActivityTypes.includes(activityType) ?
+                                              selectedActivityTypes.filter(actType => actType != activityType) :
+                                              selectedActivityTypes.concat([activityType]))
+                      }
+                      fontSize='sm'
+                      fontWeight='500'
+                      borderRadius='70px'
+                      px='24px'
+                      py='5px'>
+                        {activityType}
+                    </Button>
+                  ))
+                }
             </Flex>
 
             <FormLabel
-              ms="4px"
-              fontSize="sm"
-              fontWeight="500"
+              ms='4px'
+              fontSize='sm'
+              fontWeight='500'
+              mt="25px"
+              maxW="420px"
+              mb="10px"
               color={textColor}
               display="flex"
             >
               Budget
             </FormLabel>
-            <RangeSlider
-              defaultValue={[120, 240]}
-              min={0}
-              max={300}
-              step={30}
-              onChange={setBudgetValues}
-            >
-              <RangeSliderTrack bg="red.100">
-                <RangeSliderFilledTrack bg="blue" />
+            <RangeSlider defaultValue={[120, 240]} min={0} max={300} step={30} maxW="420px"
+              onChange={setBudgetValues}>
+              <RangeSliderTrack bg='red.100'>
+                <RangeSliderFilledTrack bg='#3E9D79' />
               </RangeSliderTrack>
-              <RangeSliderThumb boxSize={6} index={0}>
+              <RangeSliderThumb boxSize={9} index={0} bg="#E6FEF5" >
                 {budgetValues[0]}
               </RangeSliderThumb>
-              <RangeSliderThumb boxSize={6} index={1}>
+              <RangeSliderThumb boxSize={9} index={1} bg="#E6FEF5">
                 {budgetValues[1]}
               </RangeSliderThumb>
             </RangeSlider>
 
             <FormLabel
-              ms="4px"
-              fontSize="sm"
-              fontWeight="500"
+              mt="15px"
+              mb="10px"
+              fontSize='sm'
+              fontWeight='500'
               color={textColor}
               display="flex"
             >
               Group
             </FormLabel>
             <Flex
-              align="center"
-              me="20px"
-              ms={{ base: '24px', md: '0px' }}
-              mt={{ base: '20px', md: '0px' }}
-            >
-              <Switch
-                isChecked={isGroup}
+              align='center'
+              gap={5}>
+              <Switch 
+                isChecked={isGroup} 
                 onChange={(event) => {
                   let newValue = event.target.checked;
                   setGroup(newValue);
@@ -235,20 +215,19 @@ export default function UserReports() {
                 colorScheme="teal"
               />
               <FormLabel
-                ms="4px"
-                fontSize="sm"
-                fontWeight="500"
+                fontSize='sm'
+                fontWeight='500'
                 color={textColor}
-                display="flex"
-              >
-                Number
+                m="0"
+                display='flex'>
+                How many?
               </FormLabel>
               <NumberInput
                 value={noGroupMembers}
                 onChange={(_, newValue) => setNoGroupMembers(newValue)}
                 min={1}
-                isDisabled={!isGroup}
-              >
+                width="100px"
+                isDisabled={!isGroup}>
                 <NumberInputField />
                 <NumberInputStepper>
                   <NumberIncrementStepper />
@@ -258,37 +237,30 @@ export default function UserReports() {
             </Flex>
 
             <FormLabel
-              ms="4px"
-              fontSize="sm"
-              fontWeight="500"
+              mt="15px"
+              mb="10px"
+              fontSize='sm'
+              fontWeight='500'
               color={textColor}
               display="flex"
             >
               Duration
             </FormLabel>
             <Flex
-              align="center"
-              me="20px"
-              ms={{ base: '24px', md: '0px' }}
-              mt={{ base: '20px', md: '0px' }}
-            >
+              align='center'
+              gap={3}
+              >
               <div>
                 <FormLabel
-                  ms="4px"
-                  fontSize="sm"
-                  fontWeight="500"
+                  fontSize='sm'
+                  fontWeight='500'
                   color={textColor}
                   display="flex"
                 >
                   Hours
                 </FormLabel>
-                <NumberInput
-                  defaultValue={0}
-                  min={0}
-                  value={hours}
-                  onChange={(_, valueAsNumber) => setHours(valueAsNumber)}
-                >
-                  <NumberInputField />
+                <NumberInput defaultValue={0} min={0}>
+                  <NumberInputField maxW="100px" />
                   <NumberInputStepper>
                     <NumberIncrementStepper />
                     <NumberDecrementStepper />
@@ -297,21 +269,15 @@ export default function UserReports() {
               </div>
               <div>
                 <FormLabel
-                  ms="4px"
-                  fontSize="sm"
-                  fontWeight="500"
+                  fontSize='sm'
+                  fontWeight='500'
                   color={textColor}
                   display="flex"
                 >
                   Days
                 </FormLabel>
-                <NumberInput
-                  defaultValue={0}
-                  min={0}
-                  value={days}
-                  onChange={(_, valueAsNumber) => setDays(valueAsNumber)}
-                >
-                  <NumberInputField />
+                <NumberInput defaultValue={0} min={0}>
+                  <NumberInputField maxW="100px" />
                   <NumberInputStepper>
                     <NumberIncrementStepper />
                     <NumberDecrementStepper />
@@ -321,25 +287,24 @@ export default function UserReports() {
             </Flex>
 
             <FormLabel
-              display="flex"
-              ms="4px"
-              fontSize="sm"
-              fontWeight="500"
-              color={textColor}
-              mb="8px"
-            >
+              display='flex'
+              mt="15px"
+              mb="10px"
+              fontSize='sm'
+              fontWeight='500'
+              color={textColor}>
               Level of physical activity
             </FormLabel>
             <Flex
-              align="center"
-              me="20px"
-              ms={{ base: '24px', md: '0px' }}
-              mt={{ base: '20px', md: '0px' }}
-            >
+              align='center'
+              gap={2}
+              >
+                
               {levels.map((level) => (
                 <Button
                   key={level}
                   variant={selectedLevels === level ? 'brand' : 'white'}
+                  bg={selectedLevels === level ? '#3E9D79' : '#E6FEF5'}
                   color={selectedLevels === level ? 'white' : 'black'}
                   onClick={() => setSelectedLevels(level)}
                   fontSize="sm"
@@ -358,9 +323,12 @@ export default function UserReports() {
               ms="4px"
               fontSize="sm"
               fontWeight="500"
+              display='flex'
+              mt="15px"
+              fontSize='sm'
+              fontWeight='500'
               color={textColor}
-              mb="8px"
-            >
+              mb='10px'>
               Additional info
             </FormLabel>
             <Textarea
@@ -369,14 +337,14 @@ export default function UserReports() {
             />
 
             <Button
-              fontSize="sm"
-              variant="brand"
-              fontWeight="500"
-              w="100%"
-              h="50"
-              mb="24px"
-              onClick={handleSubmit}
-            >
+              fontSize='sm'
+              mt="25px"
+
+              variant='brand'
+              fontWeight='500'
+              w='auto'
+              h='50'
+              mb='24px'>
               Find me activities
             </Button>
           </FormControl>
@@ -385,6 +353,7 @@ export default function UserReports() {
       {generatedJourneys.length > 0 ? (
         generatedJourneys.map((journey, index) => (
           <NFT
+            is_active={false}
             key={index}
             name={journey.name_of_location}
             location="Cluj-Napoca, Romania"

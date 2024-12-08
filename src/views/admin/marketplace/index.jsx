@@ -35,6 +35,7 @@ export default function Marketplace() {
             {userData.journal?.journeys?.length > 0 ? (
               userData.journal.journeys.map((journey, index) => (
                 <NFT
+                  is_active={true}
                   key={index}
                   journey_id={journey.id}
                   name={journey.name_of_location}
@@ -45,8 +46,8 @@ export default function Marketplace() {
                   stars={journey.rating}
                   benefits={journey.tags}
                   link_to_maps={journey.maps_link}
-                  // leave_review={journey.rating === null ? '1' : '0'}
-                  leave_review="1"
+                  how_felt={journey.how_felt}
+                  leave_review={journey.rating === null ? '1' : '0'}
                 />
               ))
             ) : (
