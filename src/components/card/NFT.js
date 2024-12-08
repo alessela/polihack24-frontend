@@ -41,7 +41,7 @@ export default function NFT(props) {
     name,
     location,
     benefits,
-    leave_review,
+    leave_review: initialLeaveReview = '1',
     budget_breakdown,
     wellbeing_impact,
     stars: initialStars = 0,
@@ -61,6 +61,7 @@ export default function NFT(props) {
   const [rating, setRating] = useState(0);
   const [stars, setStars] = useState(initialStars);
   const [how_felt, setHowFelt] = useState(initialHowFelt);
+  const [leave_review, setLeaveReview] = useState(initialLeaveReview);
   const [reviewText, setReviewText] = useState('');
 
   const handleRating = (rate) => {
@@ -92,6 +93,7 @@ export default function NFT(props) {
         console.log('Review submitted successfully');
       setStars(rating);
       setHowFelt(reviewText);
+      setLeaveReview('0');
         onReviewClose(); // Close the modal on success
       } else {
         console.error('Failed to submit review');

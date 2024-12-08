@@ -43,12 +43,11 @@ export default function Marketplace() {
                   description={journey.description}
                   budget_breakdown={journey.budget_breakdown}
                   wellbeing_impact={journey.wellbeing_impact}
-                  stars={null}
+                  stars={journey.rating}
                   benefits={journey.tags}
                   link_to_maps={journey.maps_link}
                   how_felt={journey.how_felt}
-                  //leave_review={journey.rating === null ? '1' : '0'}
-                  leave_review="1"
+                  leave_review={journey.rating === null ? '1' : '0'}
                 />
               ))
             ) : (
