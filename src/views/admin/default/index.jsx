@@ -39,6 +39,7 @@ import {
   RangeSliderThumb,
   RangeSliderTrack,
   SimpleGrid,
+  Text,
   Switch,
   Textarea,
   useColorModeValue,
@@ -51,7 +52,7 @@ export default function UserReports() {
   const textColor = useColorModeValue('navy.700', 'white');
   const [budgetValues, setBudgetValues] = React.useState([0, 1000]);
 
-  const activityTypes = ['outdoor', 'hiking', 'volunteering', 'music', 'cultural', 'art', 'sports', 'food', 'shopping', 'relaxing', 'adventure', 'sightseeing', 'nightlife', 'wellness', 'learning', 'social', 'family', 'pets', 'water', 'mountain', 'forest', 'city', 'beach', 'desert', 'island', 'lake', 'river', 'park', 'garden', 'cave', 'castle', 'museum', 'theater', 'cinema', 'concert', 'festival', 'exhibition', 'workshop', 'class', 'game'];
+  const activityTypes = ['outdoor', 'hiking', 'volunteering', 'music', 'cultural', 'art', 'sports', 'food', 'shopping', 'relaxing', 'adventure', 'sightseeing', 'nightlife', 'wellness', 'learning', 'social', 'family', 'pets', 'water', 'mountain', 'forest', 'city', 'desert', 'lake', 'river', 'park', 'garden', 'cave', 'castle', 'museum', 'theater', 'cinema', 'concert', 'festival', 'exhibition', 'workshop', 'class', 'game'];
   const [selectedActivityTypes, setActivityTypes] = React.useState(['volunteering'])
 
   const levels = ['high', 'moderate', 'low'];
@@ -363,7 +364,10 @@ export default function UserReports() {
       </Flex>
       <SimpleGrid columns={{ base: 2, md: 3 }} gap="20px" mt="30px" ref={resultsGrid}>
       {generatedJourneys.length > 0 ? (
-        generatedJourneys.map((journey, index) => (
+        <Box>
+          <Text mt="50px" mb="5px" fontSize="32px" fontWeight={600} align="center">Discover these adventures</Text>
+          <Text mb="30px" fontSize="16px" fontWeight={400} align="center">We've found 3 new possible aventures tailored to your needs.</Text>
+        {generatedJourneys.map((journey, index) => (
           <NFT
             is_active={false}
             key={index}
@@ -377,8 +381,9 @@ export default function UserReports() {
             link_to_maps={journey.maps_link}
             leave_review="0"
           />
-        ))
-      ) : (
+        ))}
+        </Box>
+        ) : (
         <></>
       )}
       </SimpleGrid>
