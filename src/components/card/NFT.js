@@ -19,7 +19,8 @@ import {
   Text,
   Textarea,
   useColorModeValue,
-  useDisclosure
+  useDisclosure,
+  useToast
 } from '@chakra-ui/react';
 import { IoStar, IoStarOutline } from 'react-icons/io5';
 // Custom components
@@ -59,6 +60,7 @@ export default function NFT(props) {
   const [how_felt, setHowFelt] = useState(initialHowFelt);
   const [leave_review, setLeaveReview] = useState(initialLeaveReview);
   const [reviewText, setReviewText] = useState('');
+  const toast = useToast();
 
   const handleRating = (rate) => {
     setRating(rate);
@@ -127,6 +129,18 @@ export default function NFT(props) {
       console.error('Error submitting review:', error.message);
     }
     onReviewClose();
+
+    onClose();
+
+    // Show the toast
+    toast({
+      title: "You joined the activity successfully.",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+      position: "top",
+      fontWeight: "500",
+    });
   };
 
   return (
